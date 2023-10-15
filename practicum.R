@@ -167,7 +167,7 @@ df$seek_help[shouldBecomeOther]<- "Don't Know"
 shouldBecomeOther<-!(df$anonymity %in% c("No", "Yes", "Don't Know", NA))
 df$anonymity[shouldBecomeOther]<- "Don't Know"
 
-#leave, mental_health_cons looked clean and were left alone. Did not even see "NA" strings
+#leave, mental_health_consequence looked clean and were left alone. Did not even see "NA" strings
 
 
 #Clean phys_health_consequence
@@ -199,9 +199,12 @@ df <- df[rowSums(is.na(df)) < 20, ]
 ## Graph variables
 
 
-#How much work interferes with mental health for each gender
-gender_plot <- ggplot(df, aes(gender))
+
+
+#How much work interferes with mental health for employees of companies of varying sizes
+gender_plot <- ggplot(data=subset(df, !is.na(gender)), aes(gender)) 
 gender_plot + geom_bar(aes(fill = work_interfere))
+
 
 #How much work interferes with mental health for employees of companies of varying sizes
 n_employees <- ggplot(data=subset(df, !is.na(no_employees)), aes(no_employees)) 
